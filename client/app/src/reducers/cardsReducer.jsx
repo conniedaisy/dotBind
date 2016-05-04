@@ -3,10 +3,10 @@
 const cardsReducer = (state = [], action) => {
   switch(action.type) {
     case 'ADD_CARD':
-      return [{
+      return [...state, {
           id: action.id,
           url: action.url
-        }, ...state];
+        }];
     case 'FETCH_CARDS':
       return [...state, ...action.payload.data.data];
     default:
