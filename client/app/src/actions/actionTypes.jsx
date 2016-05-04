@@ -5,7 +5,7 @@
 
 import axios from 'axios';
 
-let nextCardId = 0;
+let nextCardId = 1;
 
 export const addCardAction = (url) => {
   return {
