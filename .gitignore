@@ -5,3 +5,4 @@ server/static/dist
 client/app/dist
 client/app/node_modules
 server/api/search.js
+npm-debug.log
