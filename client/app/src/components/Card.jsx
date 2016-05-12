@@ -100,14 +100,19 @@ class Card extends React.Component {
               <textarea className="notes" defaultValue={this.props.note} onChange={this.remindSave.bind(this)}></textarea>
             </div>
             <hr/>
+
             <div className="modal-footer">
-              <a className="modal-link" href={this.props.url}>View Original Resource</a><br/>
-              {this.props.cardTags.map((cardTag) =>
+              <a className="modal-link" href={this.props.url}>View Original Resource</a>
+              <br/>
+
+              {this.props.cardTags ? this.props.cardTags.map((cardTag) =>
                 <div className="chip">
                   <CardTag key={cardTag.tag.id} name={cardTag.tag.name}/>
                   <i className="material-icons">close</i>
                 </div>
-              )} <br/>
+              ) : <span></span>}
+
+              <br/>
               <button className="waves-effect waves-light btn" onClick={this.notifyCardUpdate.bind(this)}>Save Changes</button>
             </div>
           </Modal>
