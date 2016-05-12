@@ -122,10 +122,7 @@ module.exports = (function() {
                 // Resolve CardTag Promises
                 Promise.all(cardTagPromises).then((cardTags) => {
                   this.respond(aCard, ['id', 'user_id', 'title', 'url', 'icon', 'domain', 'code', 'text', 'note']);
-                  // this.respond([aCard, tags]);
 
-                  // console.log('aCard: ', aCard._data);
-                  // console.log('tags: ', tags);
                   console.log('ELASTICSEARCH!!!!!');
 
                   const cardData = aCard._data;
