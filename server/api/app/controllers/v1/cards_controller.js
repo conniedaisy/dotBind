@@ -114,6 +114,7 @@ module.exports = (function() {
                 cardTagPromises.push(findOrCreateCardTag({tag_id, card_id}));
               });
 
+              console.log('tagModel============>>>>: ', tagModel);
               // Resolve UserTag Promises
               Promise.all(userTagPromises).then((userTags) => {
                 userTags.forEach((user_tag) => {

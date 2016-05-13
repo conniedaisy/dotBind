@@ -11,6 +11,7 @@ const cardsReducer = (state = [], action) => {
         };
         return false;
       });
+      console.log('filteredCards', filteredCards);
       return [...filteredCards];
     case 'SEARCH_CARDS':
       let searchCardsState = [];
