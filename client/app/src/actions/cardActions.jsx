@@ -64,7 +64,6 @@ export const searchCardsAction = (keywords) => {
     }
   };
 
-  console.log("HOW ABOUT HERE?");
   const request = client.search(query);
     // .then((response) => {
     //   console.log('RESPONSE: ', response);
