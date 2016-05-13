@@ -20,7 +20,7 @@ module.exports = (function() {
   /* ElasticSearch */
   const elasticsearch = require('elasticsearch');
   const client = new elasticsearch.Client({
-    host: 'localhost:9200/library/cards',
+    host: 'localhost:9200',
     log: 'trace'
   });
 
@@ -43,9 +43,9 @@ module.exports = (function() {
       // }
       console.log('ANYTHING??????', this.params.query);
 
-      if (this.params.query) {
+      if (this.params.query.query) {
         console.log('QUERY============>: ', this.params.query);
-        client.search(this.params.query['0'], function(err, cards) {
+        client.search(this.params.query.query, function(err, cards) {
           console.log('ES SEARCH RESPONSE: ', cards);
           console.log('ES SEARCH ERROR: ', error);
           this.respond( err || cards );
