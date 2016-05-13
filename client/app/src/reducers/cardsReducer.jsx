@@ -1,6 +1,7 @@
 const cardsReducer = (state = [], action) => {
   switch(action.type) {
     case 'ADD_CARD':
+      console.log('ADDCARD NEW STATE: ', [...state, action.payload.data.data]);
       return [...state, action.payload.data.data];
     case 'FETCH_CARDS':
       return [...state, ...action.payload.data.data];
@@ -14,12 +15,23 @@ const cardsReducer = (state = [], action) => {
       console.log('filteredCards', filteredCards);
       return [...filteredCards];
     case 'SEARCH_CARDS':
-      let searchCardsState = [];
+      const returnedIDs = [];
       action.payload.hits.hits.forEach(function(obj) {
-        searchCardsState.push(obj._source);
+        returnedIDs.push(obj._source.id);
       })
+      console.log('returnedIDs: ', returnedIDs);
+      const searchedCards = state.slice().filter((card) => {
+        if (returnedIDs.indexOf(card.id) > -1) { return true; }
+      });
+      console.log('searchedCards: ', searchedCards);
+
+      // console.log('SEARCH: ', action.payload.hits.hits[0]._source);
+      // let searchCardsState = [];
+      // action.payload.hits.hits.forEach(function(obj) {
+      //   searchCardsState.push(obj._source);
+      // })
       // console.log('SEARCH CARDS PAYLOAD: ', searchCardsState);
-      return [...searchCardsState];
+      return [...searchedCards];
     default:
       return state;
   };

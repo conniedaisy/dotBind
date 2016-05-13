@@ -14,7 +14,7 @@ class AllCardsContainer extends React.Component {
   }
 
   render() {
-    // console.log(this.props)
+    console.log('I AM HERE!!!!', this.props.cards)
     return (
       <div>
         {this.props.cards.map((card) =>
