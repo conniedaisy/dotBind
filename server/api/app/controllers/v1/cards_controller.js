@@ -20,7 +20,7 @@ module.exports = (function() {
   /* ElasticSearch */
   const elasticsearch = require('elasticsearch');
   const client = new elasticsearch.Client({
-    host: 'localhost:9200',
+    host: 'localhost:9200/library/cards',
     log: 'trace'
   });
 
@@ -28,12 +28,40 @@ module.exports = (function() {
 
     index() {
 
-      Card.query()
-        .join('cardTags__tag')
-        .where(this.params.query)
-        .end((err, cards) => {
-          this.respond( err || cards, ['id', 'user_id', 'title', 'url', 'icon', 'domain', 'code', 'text', 'note', {cardTags: [{tag: ['id', 'name']}]}]);
-        });
+      // console.log('INDEX PARAMS TYPE: ', typeof this.params.query);
+      // console.log('MY OBJECT!! ', this.params.query);
+
+      // if (this.params.query.hasOwnProperty('0')) {
+      //   client.search(this.params.query['0'])
+      //     .then((response) => {
+      //       console.log('ES SEARCH RESPONSE: ', response);
+      //       console.log('another console.log');
+      //         this.respond(response.hits.hits);
+      //       }, (error) => 
+      //       console.log('ES SEARCH ERROR: ', error)
+      //     )
+      // }
+      console.log('ANYTHING??????', this.params.query);
+
+      if (this.params.query) {
+        console.log('QUERY============>: ', this.params.query);
+        client.search(this.params.query['0'], function(err, cards) {
+          console.log('ES SEARCH RESPONSE: ', cards);
+          console.log('ES SEARCH ERROR: ', error);
+          this.respond( err || cards );
+          // console.log('ES SEARCH THIS: ', this);
+        }.bind(this));
+      } else {
+        Card.query()
+          .join('cardTags__tag')
+          .where(this.params.query)
+          .end((err, cards) => {
+            // console.log("DB CARDS: ", cards);
+            this.respond( err || cards, ['id', 'user_id', 'title', 'url', 'icon', 'domain', 'code', 'text', 'note', {cardTags: [{tag: ['id', 'name']}]}]);
+          });     
+      }
+
+
 
     }
 
@@ -123,8 +151,7 @@ module.exports = (function() {
                 Promise.all(cardTagPromises).then((cardTags) => {
                   this.respond(aCard, ['id', 'user_id', 'title', 'url', 'icon', 'domain', 'code', 'text', 'note']);
 
-                  console.log('ELASTICSEARCH!!!!!');
-
+                  // POST to ELASTICSEARCH
                   const cardData = aCard._data;
                   const tagData = tags;
                   const esPost = {
@@ -132,21 +159,23 @@ module.exports = (function() {
                     type: 'cards',
                     body: {
                       id: cardData.id,
+                      user_id: cardData.user_id,
                       title: cardData.title,
                       url: cardData.url,
+                      icon: cardData.icon,
                       domain: cardData.domain,
                       code: cardData.code,
                       text: cardData.text,
                       note: cardData.note,
-                      cardTags: tags,
+                      cardTags: tags, // need to get cardTags in the right format???
                     },
                   };
 
                   client.create(esPost)
                     .then((response) => 
-                      console.log('response: ', response),
+                      console.log('this should not be responding: ', response),
                       (error) => 
-                      console.log('error: ', error)
+                      console.log('this sould not be responding: ', error)
                     );
                 });
               });
