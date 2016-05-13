@@ -13,8 +13,12 @@ const cardsReducer = (state = [], action) => {
       });
       return [...filteredCards];
     case 'SEARCH_CARDS':
-      console.log('SEARCH CARDS PAYLOAD: ', action.payload.hits.hits);
-      return [...action.payload.hits.hits];
+      let searchCardsState = [];
+      action.payload.hits.hits.forEach(function(obj) {
+        searchCardsState.push(obj._source);
+      })
+      // console.log('SEARCH CARDS PAYLOAD: ', searchCardsState);
+      return [...searchCardsState];
     default:
       return state;
   };
