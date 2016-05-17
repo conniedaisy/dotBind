@@ -42,15 +42,15 @@ export const fetchCardsAction = () => {
   };
 };
 
-export const filterCardsAction = (tag) => {
-  return {
-    type: 'FILTER_CARDS',
-    tag: tag,
-  }
-};
+// export const filterCardsAction = (tag) => {
+//   return {
+//     type: 'FILTER_CARDS',
+//     tag: tag,
+//   }
+// };
 
 export const searchCardsAction = (keywords) => {
-  console.log("searchCardsAction is called: ", keywords);
+  // console.log("searchCardsAction is called: ", keywords);
 
   const query = {
     params: {
