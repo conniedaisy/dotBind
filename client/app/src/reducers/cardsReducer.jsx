@@ -17,10 +17,10 @@ const cardsReducer = (state = [], action) => {
       });
       return searchedCards;
 
-    case 'SEARCH_CARDS_BY_TAG':
-      let searched = [];
-      action.payload.data.data.forEach(card => searched.push(card._source))
-      return searched;
+    // case 'SEARCH_CARDS_BY_TAG':
+    //   let searched = [];
+    //   action.payload.data.data.forEach(card => searched.push(card._source))
+    //   return searched;
 
     case 'UPDATE_CARD':
       var data = action.payload.data.data[0];
