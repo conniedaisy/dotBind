@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { filterCardsAction } from '../actions/cardActions';
-import { searchCardsAction, searchCardsByTagAction } from '../actions/cardActions';
+import { searchCardsByTagAction } from '../actions/cardActions';
 // import { switchDisplayAction } from '../actions/searchActions';
 import { addSearchKeywordAction } from '../actions/searchActions';
 
@@ -16,7 +16,6 @@ class Tag extends React.Component {
   render() {
     return (
         <a className="collection-item" onClick={() => {
-
           let searchString = '';
           if (this.props.search) {
             searchString = searchString.concat(this.props.search.input, ' ', this.props.tagName)
