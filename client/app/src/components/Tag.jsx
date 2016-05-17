@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { filterCardsAction } from '../actions/cardActions';
 import { searchCardsAction } from '../actions/cardActions';
-import { addSearchKeywordAction } from '../actions/searchActions';
+import { switchDisplayAction } from '../actions/searchActions';
+// import { addSearchKeywordAction } from '../actions/searchActions';
 
 
 class Tag extends React.Component {
@@ -16,7 +17,7 @@ class Tag extends React.Component {
     return (
         <a className="collection-item" onClick={() => {
           this.props.searchCards(this.props.tagName);
-          this.props.addSearchKeyword(this.props.tagName);
+          this.props.switchDisplay(false, this.props.tagName);
         }}>
           {this.props.tagName}
           <span className="badge">{this.props.card_count}</span>
@@ -34,7 +35,8 @@ class Tag extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     searchCards: searchCardsAction,
-    addSearchKeyword: addSearchKeywordAction,
+    switchDisplay: switchDisplayAction
+    // addSearchKeyword: addSearchKeywordAction,
   }, dispatch);
   // return bindActionCreators({filterCards: filterCardsAction}, dispatch);
 };
