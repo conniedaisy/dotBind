@@ -10,6 +10,7 @@ class AllCardsContainer extends React.Component {
   }
 
   componentWillMount() {
+    this.props.fetchCards();
     setTimeout(() => {
       const intervalId = setInterval(() => {
         if (!this.props.search.input) {

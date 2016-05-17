@@ -7,8 +7,8 @@ const cardsReducer = (state = [], action) => {
     case 'FETCH_CARDS':
       return [...action.payload.data.data];
 
-    case 'FILTER_CARDS':
-      return filteredCards(state, action.tag);
+    // case 'FILTER_CARDS':
+    //   return filteredCards(state, action.tag);
 
     case 'SEARCH_CARDS':
       // console.log('PAYLOAD: ', action.payload.data.data);
