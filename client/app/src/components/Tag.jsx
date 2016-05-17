@@ -17,6 +17,7 @@ class Tag extends React.Component {
     return (
         <a className="collection-item" onClick={() => {
           let searchString = '';
+          console.log('ANYTHING IN SEARCH STATE???', this.props.search);
           if (this.props.search) {
             searchString = searchString.concat(this.props.search.input, ' ', this.props.tagName)
           } else {

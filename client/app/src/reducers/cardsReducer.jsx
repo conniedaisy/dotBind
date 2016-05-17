@@ -7,9 +7,6 @@ const cardsReducer = (state = [], action) => {
     case 'FETCH_CARDS':
       return [...action.payload.data.data];
 
-    // case 'FILTER_CARDS':
-    //   return filteredCards(state, action.tag);
-
     case 'SEARCH_CARDS':
       const returnedIDs = [];
       action.payload.data.data.forEach(function(obj) {
@@ -18,17 +15,12 @@ const cardsReducer = (state = [], action) => {
       const searchedCards = state.slice().filter((card) => {
         if (returnedIDs.indexOf(card.id) > -1) { return true; }
       });
-      // let searchedCards = [];
-      // action.payload.data.data.forEach(card => searchedCards.push(card._source))
-      // console.log('SEARCH_CARDS REDUCER', searchedCards);
       return searchedCards;
 
     case 'SEARCH_CARDS_BY_TAG':
       let searched = [];
       action.payload.data.data.forEach(card => searched.push(card._source))
-      console.log('SEARCH_CARDS REDUCER', searched);
       return searched;
-
 
     case 'UPDATE_CARD':
       var data = action.payload.data.data[0];
