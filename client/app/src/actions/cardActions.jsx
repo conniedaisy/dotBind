@@ -11,25 +11,10 @@ const headers = {
 
 export const addCardAction = (url) => {
   const accessToken = localStorage.getItem('dotBindAccessToken');
-  const username = localStorage.getItem('githubUsername')
+  const username = localStorage.getItem('githubUsername');
   const request = axios.get(`${endpoints.fetchsite}?url=${url}&username=${username}&accessToken=${accessToken}`);
-  console.log('username: ', username)
-  console.log('accessToken: ', accessToken)
-  // const request = axios.post(endpoints.cards, {
-  //   "card": {
-  //     "url": url,
-  //     "title": "title",
-  //     "code": "var hello = function() {};",
-  //     "text": "This is my text",
-  //     "note": "This is a note about my content",
-  //     "domain": "american.com"
-  //   },
-  //   "username": "public",
-  //    "tags": [
-  //     "React",
-  //     "Backbone"
-  //    ]
-  // });
+  // console.log('username: ', username);
+  // console.log('accessToken: ', accessToken);
 
   return {
     type: 'ADD_CARD',
@@ -61,13 +46,13 @@ export const fetchCardsAction = () => {
 
 export const setToCardsAction = () => {
   return {
-    type: 'TO_MYCARDS'
+    type: 'TO_MYCARDS',
   }
 };
 
 export const setToFilterAction = () => {
   return {
-    type: 'TO_FILTER'
+    type: 'TO_FILTER',
   }
 };
 
@@ -93,7 +78,7 @@ export const fetchInboxCountAction = () => {
 export const setToInboxAction = () => {
   return {
     type: 'TO_INBOX'
-  }
+  };
 };
 
 export const searchCardsAction = (keywords) => {
@@ -142,7 +127,7 @@ export const updateCardAction = (reqBody) => {
   const request = axios.put(endpoint, {
     code: reqBody.code,
     note: reqBody.note,
-    language: reqBody.language
+    language: reqBody.language,
   });
   return {
     type: 'UPDATE_CARD',
@@ -203,7 +188,6 @@ export const addTagToCardAction = (tagName, userId, cardId) => {
 };
 
 export const removeCardFilterAction = (keywords) => {
-  // first search
   const query = {
     params: {
       "query": {
@@ -241,5 +225,5 @@ export const removeCardFilterAction = (keywords) => {
   return {
     type: 'REMOVE_CARD_FILTER',
     payload: request,
-  }
+  };
 };
